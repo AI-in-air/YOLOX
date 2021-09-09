@@ -217,3 +217,5 @@ events.out.tfevents*
 
 # vim
 .vim
+
+!yolox_pretrain_model/yolox_nano.pth

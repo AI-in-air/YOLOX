@@ -8,8 +8,10 @@ import time
 from loguru import logger
 
 import cv2
-
+import sys
 import torch
+this_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, this_path)
 
 from yolox.data.data_augment import ValTransform
 from yolox.data.datasets import COCO_CLASSES
@@ -54,7 +56,7 @@ def make_parser():
     )
     parser.add_argument("--conf", default=0.3, type=float, help="test conf")
     parser.add_argument("--nms", default=0.3, type=float, help="test nms threshold")
-    parser.add_argument("--tsize", default=None, type=int, help="test img size")
+    parser.add_argument("--tsize", default=640, type=int, help="test img size")
     parser.add_argument(
         "--fp16",
         dest="fp16",
@@ -311,3 +313,8 @@ if __name__ == "__main__":
     exp = get_exp(args.exp_file, args.name)
 
     main(exp, args)
+
+
+
+# python tools\demo.py image -f exps\default\yolox_s.py -c yolox_pretrain_model\yolox_s.pth --save_result
+# python tools\demo.py image -f exps\default\nano.py -c yolox_pretrain_model\yolox_nano.pth  --save_result
